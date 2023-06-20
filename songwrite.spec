@@ -5,10 +5,11 @@
 Summary:	Guitar tabulature editor with playing and printing
 Name:		%{name}
 Version:	0.2
-Release:	1
+Release:	2
 License:	GPLv3
 Group:		Sound
 Source0:	https://pypi.io/packages/source/%{mod}/%{oname}/%{oname}-%{version}.tar.gz
+Url:		https://pypi.org/project/Songwrite3/
 BuildRequires:	imagemagick
 BuildRequires:	pkgconfig(python)
 BuildRequires:	python3dist(setuptools)
@@ -36,7 +37,7 @@ Timidity to play midi and on GNU Lilypond for printing.
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/pixmaps/%{name}.xpm
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/metainfo/*.appdata.xml
+%{_datadir}/mime/packages/*.appdata.xml
 #%%{_docdir}/%{name}/{en,fr}
 #%%{_docdir}/%{name}/*xml
 %{_mandir}/man1/%{name}.1.*
@@ -77,9 +78,9 @@ rm -fr %{buildroot}%{py3_puresitedir}/%{name}/manpage
 install -dm 0755 %{buildroot}%{_mandir}/man1/
 install -pm 0644 manpage/man1/* %{buildroot}%{_mandir}/man1/
 
-# appdata
-install -dm 0755 %{buildroot}%{_datadir}/metainfo
-install -pm 0644 application-x-songwrite.xml %{buildroot}%{_datadir}/metainfo/%{name}.appdata.xml
+# shared-mime-info data
+install -dm 0755 %{buildroot}%{_datadir}/mime/packages
+install -pm 0644 application-x-songwrite.xml %{buildroot}%{_datadir}/mime/packages/%{name}.appdata.xml
 
 # icons
 for d in 16 32 48 64 72 128 256
@@ -96,4 +97,3 @@ convert -size 32x32 data/%{name}.png \
 mv %{buildroot}%{py3_puresitedir}/%{name}/locale %{buildroot}%{_datadir}
 rm -f %{buildroot}%{_datadir}/locale/*/*/*.po
 %find_lang %{name}
-
